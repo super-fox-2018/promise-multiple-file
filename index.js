@@ -4,8 +4,11 @@ var sleep = require('sleep');
 function readFilePromise(file) {
   return new Promise((resolve, reject) =>{
     fs.readFile(file, 'utf8', (err, data)=>{
-      if(err) reject(err);
-      resolve(JSON.parse(data))
+      if (err){
+        reject(err);
+      }else{
+        resolve(JSON.parse(data))
+      }
     })
   })
 }
@@ -36,8 +39,8 @@ function matchParentsWithChildrens(parentFileName, childrenFileName) {
   })
 }
 
-// matchParentsWithChildrens('./parents.json', './childrens.json');
-// console.log("Notification : Data sedang diproses !");
+matchParentsWithChildrens('./parents.json', './childrens.json');
+console.log("Notification : Data sedang diproses !");
 
 // for Release 2
 matchParentsWithChildrens('./parents.json', './not_a_real_file.json');
