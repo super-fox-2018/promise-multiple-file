@@ -4,8 +4,8 @@ var { sleep } = require('sleep');
 function readFilePromise(filename) {
   return new Promise(function(resolve, reject) {
     fs.readFile(filename, 'utf8', (err, outputString) => {
+      if (err) return reject(err);
       sleep(5);
-      if (err) reject(err);
       const outputData = JSON.parse(outputString);
       resolve(outputData);
     });
@@ -34,12 +34,12 @@ function matchParentsWithChildrens(parentFileName, childrenFileName) {
 
       console.log(parentData);
     })
-    .catch(err => console.warn(err));
+    .catch(err => console.log('File Not found!'));
 }
 
-matchParentsWithChildrens('./parents.json', './children.json');
-console.log("Notification : Data sedang diproses !");
+// matchParentsWithChildrens('./parents.json', './children.json');
+// console.log("Notification : Data sedang diproses !");
 
 // for Release 2
-// matchParentsWithChildrens('./parents.json', './not_a_real_file.json');
-// matchParentsWithChildrens('./not_a_real_file.json', './also_not_a_real_file.json');
+matchParentsWithChildrens('./parents.json', './not_a_real_file.json');
+matchParentsWithChildrens('./not_a_real_file.json', './also_not_a_real_file.json');
