@@ -9,7 +9,7 @@ function readFilePromise(fileName) {
         reject (err);
       }
       else{
-        sleep.sleep(1);
+        sleep.sleep(5);
         let parsedData = JSON.parse(data);
         resolve(parsedData)
       }
@@ -31,8 +31,8 @@ function matchParentsWithChildrens(parentFileName, childrenFileName) {
               parent_data[i].children.push(children_data[k].full_name);
             }
           }
-          sleep.sleep(1);
         }
+        sleep.sleep(5);
         return parent_data;
       })
     })
@@ -40,13 +40,15 @@ function matchParentsWithChildrens(parentFileName, childrenFileName) {
       console.log(parent_data)
     })
     .catch(function(err){
+      console.log("Terjadi error pada proses pembacaan data");
       console.log(err);
     })
 
 }
 
-matchParentsWithChildrens('./parents.json', './childrens.json');
 console.log("Notification : Data sedang diproses !");
+
+matchParentsWithChildrens('./parents.json', './childrens.json');
 
 // for Release 2
 matchParentsWithChildrens('./parents.json', './not_a_real_file.json');
